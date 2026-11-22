@@ -1,6 +1,8 @@
 .godot/
-build/
-evidence/
+build/*
+!build/.gdignore
+evidence/*
+!evidence/.gdignore
 *.tmp
 *.log
 .DS_Store

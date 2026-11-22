@@ -15,8 +15,10 @@ var focus_index := 0
 var chapter_fade := 0.0
 var qa_mode := false
 var last_chapter := -1
+var quitting := false
 
 func _ready() -> void:
+	get_tree().auto_accept_quit = false
 	prepare_art()
 	j = Journey.new()
 	sound = Sound.new()
@@ -28,6 +30,9 @@ func _ready() -> void:
 			qa_mode = true
 			capture_all.call_deferred(arg.trim_prefix("--capture="))
 		elif arg == "--qa": qa_mode = true
+		elif arg == "--smoke":
+			qa_mode = true
+			smoke_test.call_deferred()
 	read_save()
 	sound.set_chapter(0)
 	queue_redraw()
@@ -105,6 +110,8 @@ func _process(delta: float) -> void:
 	queue_redraw()
 
 func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		quit_game()
 	if what == NOTIFICATION_APPLICATION_FOCUS_OUT and not menu and not qa_mode:
 		paused = true
 		focus_index = 0
@@ -168,7 +175,7 @@ func handle_button(action: String) -> void:
 			confirm_new = false
 			focus_index = 0
 		"resume": paused = false
-		"quit": get_tree().quit()
+		"quit": quit_game()
 		"menu":
 			menu = true
 			paused = false
@@ -328,7 +335,18 @@ func capture_all(folder: String) -> void:
 	await RenderingServer.frame_post_draw
 	get_viewport().get_texture().get_image().save_png(folder.path_join("10-letter.png"))
 	print("NATIVE_CAPTURE_OK: 11 screens")
+	quit_game()
+
+func smoke_test() -> void:
+	await get_tree().create_timer(0.25).timeout
+	print("RELEASE_STARTUP_OK")
+	quit_game()
+
+func quit_game() -> void:
+	if quitting: return
+	quitting = true
 	sound.music.stop()
 	sound.effect.stop()
+	# Let the audio server release its current stream before native shutdown.
 	await get_tree().create_timer(0.15).timeout
 	get_tree().quit()
