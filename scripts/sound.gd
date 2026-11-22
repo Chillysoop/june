@@ -36,8 +36,8 @@ func make_tone(frequencies: Array, duration: float, ambient := false) -> AudioSt
 	return stream
 
 func set_chapter(chapter: int) -> void:
-	var chords := [[130.8, 196.0, 261.6, 329.6], [110.0, 164.8, 220.0, 293.6], [98.0, 146.8, 196.0, 277.2], [87.3, 130.8, 174.6, 233.0], [65.4, 98.0, 164.8, 246.9], [82.4, 123.5, 185.0, 247.0], [130.8, 196.0, 261.6, 392.0]]
-	music.stream = make_tone(chords[clampi(chapter, 0, 6)], 6, true)
+	var chords := [[130.8, 196.0, 261.6, 329.6], [110.0, 164.8, 220.0, 293.6], [98.0, 146.8, 196.0, 277.2], [87.3, 130.8, 174.6, 233.0], [65.4, 98.0, 164.8, 246.9], [82.4, 123.5, 185.0, 247.0], [130.8, 196.0, 261.6, 392.0], [110.0, 165.0, 233.0, 330.0], [73.4, 110.0, 155.5, 220.0], [55.0, 82.4, 123.5, 185.0], [130.8, 196.0, 293.7, 392.0]]
+	music.stream = make_tone(chords[clampi(chapter, 0, 10)], 6, true)
 	if not muted: music.play()
 
 func play_cue(kind: String) -> void:
@@ -48,6 +48,8 @@ func play_cue(kind: String) -> void:
 		"flip": notes = [146.83, 293.66]
 		"talk": notes = [330.0]
 		"soft": notes = [220.0, 330.0]
+		"pin": notes = [196.0, 392.0, 587.3]
+		"echo": notes = [146.8, 220.0, 440.0]
 	effect.stream = make_tone(notes, 0.18)
 	effect.play()
 

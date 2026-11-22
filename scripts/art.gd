@@ -142,7 +142,7 @@ func draw_title() -> void:
 	wrapped("One courier. One impossible address.", 80, 430, 580, 24, CREAM)
 	wrapped("A small delivery. An increasingly unreasonable universe.", 80, 468, 520, 21, MUTED)
 	text_at("A PROGRESSIVELY PECULIAR ADVENTURE", 80, 734, 14, MUTED, mono_font)
-	text_at("FIRST DELIVERY  /  v0.1", 953, 734, 14, MUTED, mono_font)
+	text_at("THE MARGINS  /  v0.2", 953, 734, 14, MUTED, mono_font)
 	grain(Color(0.8, 0.9, 0.8, 0.09))
 
 func draw_town() -> void:

@@ -89,7 +89,7 @@ func _initialize() -> void:
 	j.action()
 	check(j.chapter == 5, "Ordinary interact cannot bypass the interface puzzle")
 	j.open_outside_door()
-	check(j.chapter == 6 and j.finished, "Player's pause-menu door completes the first delivery")
+	check(j.chapter == 6 and not j.finished, "Player's pause-menu door completes first delivery and permits continuation")
 	dismiss_all(j)
 	check(j.dialogue.is_empty(), "Ending dialogue completes without a soft lock")
 	for chapter in range(7):
@@ -97,7 +97,7 @@ func _initialize() -> void:
 		check(Journey.valid_checkpoint(save), "Checkpoint %d round trips through JSON" % chapter)
 		j.begin(chapter, false)
 		check(j.chapter == chapter and j.dialogue.is_empty(), "Checkpoint %d restores cleanly" % chapter)
-	for payload in ["null", "[]", "{}", '{"version":2,"chapter":1}', '{"version":1,"chapter":-1}', '{"version":1,"chapter":7}', '{"version":1,"chapter":1.5}', '{"version":1,"chapter":"1"}']:
+	for payload in ["null", "[]", "{}", '{"version":3,"chapter":1}', '{"version":1,"chapter":-1}', '{"version":1,"chapter":7}', '{"version":1,"chapter":1.5}', '{"version":1,"chapter":"1"}']:
 		check(not Journey.valid_checkpoint(JSON.parse_string(payload)), "Reject unsafe checkpoint: " + payload)
 	# Collision and input edge protection.
 	j.begin(1, false)

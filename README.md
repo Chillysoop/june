@@ -4,8 +4,14 @@ One courier. One impossible address. An increasingly unreasonable universe.
 
 A standalone native **Godot 4** game about June, a courier delivering a letter
 to Number Zero, Elsewhere Lane. The world changes its rules and perspective,
-but June, her letter, and what she learns remain continuous. This is the first
-delivery, designed to grow through future additions to the same story.
+but June, her letter, and what she learns remain continuous. **Version 0.2 adds
+The Margins**, the next chapter after June realizes the player is there.
+
+In the new chapter, words become physical bridges, a remembered June holds a
+switch while her present self continues, and the player steps outside a recursive
+world to hold it still. The last puzzle combines these abilities with the first
+delivery's gravity and orbital alignment. The chapter ends with a shared sentence
+and a new purpose for June and the player.
 
 ## Play
 
@@ -20,14 +26,22 @@ needed during play.
 - **1 / 2 / 3:** present evidence in the hearing. Mouse selection also works.
 - **Tab:** inspect the letter. **Escape:** pause, resume, or close the letter.
 - **M:** toggle sound. **F11:** fullscreen. **H:** wider alignment assistance in the sky puzzle.
+- In **The Margins**, **F** places a word bridge or pins an aligned world;
+  **C** switches inside/outside perspective in the final room. Stand on a moon
+  plate, then use **Escape > Keep a memory here** to leave an echo holding it.
+  These actions are introduced separately before the combined puzzle.
 
 There are no lives, timers, combat damage, or unrecoverable mistakes. Each new
-mechanic starts safely. Wrong choices explain what to try; progress isn't lost.
+mechanic starts safely. Wrong choices explain what to try. A fall in The Margins
+returns June to her last safe bank and preserves words, memories, and alignment.
 The title and pause menus accept keyboard or mouse. Movement requires a keyboard.
 
 Progress saves at each chapter boundary, not at every individual interaction.
-Continue restarts the current chapter. A completed delivery remains saved for
-future chapters. New Journey asks before replacing the checkpoint.
+Continue restarts the current room. **An old completed first-delivery save goes
+straight to The Margins**; unfinished saves keep their original chapter. First
+migration writes preserve the old file as `journey.json.v1.bak`. Sound and assist
+preferences survive the update. Fresh games can enter the new chapter by pressing
+E at the old ending. New Journey asks before replacing the checkpoint.
 
 Windows save location:
 `%APPDATA%/Godot/app_userdata/June- Return to Sender/journey.json`.
@@ -44,6 +58,7 @@ $GodotBin = 'C:/path/to/Godot.exe'
 & $GodotBin --headless --path . --editor --import
 & $GodotBin --headless --path . --script res://tests/test_journey.gd
 & $GodotBin --headless --path . --script res://tests/test_input.gd
+& $GodotBin --headless --path . --script res://tests/test_margins.gd
 & $GodotBin --headless --path . --export-release 'Windows Desktop' build/June.exe
 ```
 
@@ -57,10 +72,15 @@ This captures all scenes, dialogue, the letter, and the special pause menu,
 then exits. It never writes player saves. `--qa` also isolates manual review
 from saves. Generated captures, builds, and import caches stay outside Git.
 
+Use `--capture-margins=C:/temp/june-margins` for the 15 new-room/state captures.
+The exported executable also supports this QA argument. `--headless -- --smoke`
+checks startup and clean shutdown without opening a visible window.
+
 ## Source map
 
 - `scripts/journey.gd`: progression, movement, collision, puzzles, story, checkpoint validation.
 - `scripts/art.gd`: original procedural illustration and scene presentation.
+- `scripts/margin_art.gd`: typography, the living minute, and recursive-world art.
 - `scripts/game.gd`: native input, menus, save I/O, HUD, and capture workflow.
 - `scripts/sound.gd`: local synthesized ambience and interaction sounds.
 - `tests/`: complete route and input/lifecycle regressions.

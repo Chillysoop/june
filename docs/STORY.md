@@ -1,4 +1,4 @@
-# The first delivery — continuity bible
+# June — continuity bible
 
 **Owner direction, November 21–22, 2026:** use Godot; keep one protagonist and
 one coherent story while increasing strangeness across mechanics, genres,
@@ -30,8 +30,30 @@ asks the player to pause, and crosses a boundary she cannot cross on her own.
 | Outside the story | Act through the game's own interface | June recognizes the instructions address someone else; genuine pause becomes a door. |
 | Someone is listening | Establish the next relationship | June knows the player exists. A presence acknowledges delivery. |
 
-There is currently no next playable chapter after the first delivery. The saved
-completion is an expansion point, not a promise of an already built second act.
+## The Margins (version 0.2, November 22, 2026)
+
+The owner requested the next chapter after June recognizes the player, building
+on learned mechanics and becoming much stranger. This chapter is now playable:
+
+| Section | New rule | Reused knowledge and consequence |
+| --- | --- | --- |
+| Please hold this thought | The player makes HERE solid on floor or ceiling | Walking and gravity combine with editing the page; collect I and AM. |
+| A minute with teeth | Pause leaves a remembered June holding a moon plate | June walks past a gate and flips to an eye plate while her past self stays. Earn WITH. |
+| A door in the pupil | C changes between inside and outside the same world | Rotate the world like the earlier sky, pin it with F, leave an echo, and cross the ceiling bridge to YOU. |
+| The other side has a street | June writes a sentence with the player | I AM WITH YOU is addressed to the player. The sender's name has been erased. June chooses to find the missing person. |
+
+The Margin is an editorial presence trying to keep readers and characters on
+their designated sides. June objects: the player is her collaborator, not cargo.
+The new letter is not a replacement for the old one: its previously blank reverse
+side becomes the space they explore and the sentence they assemble together.
+
+Typography, violet clockwork, and nested wireframe rooms deliberately depart
+from the first delivery's illustrated town. June retains her cap, coat, and bag.
+The echo is June's memory, not a second protagonist. The outlined empty place
+beside June at the ending represents the player; it never uses personal data.
+
+Only these two deliveries are implemented. Finding the erased sender is the
+next expansion point, not a currently playable third chapter.
 
 ## Future escalation
 
@@ -53,8 +75,14 @@ game's access to the player's machine.
 
 ## Save evolution
 
-Schema 1 stores a chapter boundary plus sound and assist preferences. Completed
-chapter 6 resumes the epilogue. When extending the story, explicitly migrate
-that completion to the new continuation while retaining the learned story facts.
-Never replay rewards, silently wipe the save, or require starting over just to
-reach a newly added section. Add migration tests with the next chapter.
+Schema 2 stores a room boundary plus sound and assist preferences. Schema 1
+chapters 0–5 stay where they are; its completed chapter 6 migrates to chapter 7,
+the first Margins room. Reading a legacy save changes no bytes. The first write
+backs up the original file once, then atomically replaces it. Schema 2 chapter 6
+is the first-delivery interlude with an E continuation, and chapter 10 is the new
+completed ending. Room-level progress reconstructs earned words from the current
+chapter; within a room, recovery preserves words and puzzle state, while Continue
+restarts that room. It is deliberately not a mid-movement save.
+
+When adding the third delivery, preserve the chapter-10 completion and extend it
+explicitly. Never silently wipe saves or make a returning player replay the game.
